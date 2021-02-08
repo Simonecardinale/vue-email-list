@@ -20,22 +20,32 @@
 
 // JQuery
 
-var arrayEmail = [];
+// var arrayEmail = [];
+// for(let i = 0; i <10; i++){
+//     $.ajax({
+//         url: "https://flynn.boolean.careers/exercises/api/random/mail",
+//         type: "GET",
+//         success: function (response) {
+//             console.log(response);
+//             $('#jqueryp').append(response.response)
+//         },
+//         error: function () {
+//             alert( 'C’è stato un’errore' );
+//         }
+        
+//     });
+// }
 
-$.ajax({
-    url: "https://flynn.boolean.careers/exercises/api/random/mail",
-    type: "GET",
-    success: function (response) {
-        for(let i = 0; i < 10; i++){
-            arrayEmail.push(response);
-            console.log(arrayEmail);
-        }
-            for(var k in arrayEmail){
-                $('#jqueryp').html(arrayEmail[k].response)
-            }
-    },
-    error: function () {
-        alert( 'C’è stato un’errore' );
-    }
-    
-});
+
+
+var arrayEmail = [];
+for(let i = 0; i < 10; i++){
+    fetch('https://flynn.boolean.careers/exercises/api/random/mail').then(function (response){
+        return response.json();
+    }).then(function(data) {
+        console.log(data);
+        document.getElementById("jqueryp").innerHTML+= data.response + "<br />";
+    }) .catch (function(err) {
+        alert("Errore", err)
+    });
+}
